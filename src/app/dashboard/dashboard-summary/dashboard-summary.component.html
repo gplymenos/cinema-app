@@ -1,0 +1,8 @@
+<div class="summary-wrapper">
+  @for(section of summaryData(); track $index) {
+  <div class="section">
+    <div class="header">{{ section.title }}</div>
+    <div class="count">{{ section.count }}</div>
+  </div>
+  }
+</div>

@@ -1,0 +1,19 @@
+<app-add-dialog>
+  <form #form>
+    <div>
+      <input
+        id="cinemaName"
+        placeholder="Cinema Name"
+        [required]="true"
+        #cinemaNameInput
+      />
+    </div>
+  </form>
+
+  <div class="buttons">
+    <button mat-button (click)="closeModal()">Cancel</button>
+    <button mat-button (click)="submit(form)" type="submit" cdkFocusInitial>
+      Submit
+    </button>
+  </div>
+</app-add-dialog>
