@@ -1,13 +1,19 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { apiUrl } from '../api';
-import { Cinema, CinemaWithScreens, DataObject } from '../models/cinema.model';
+import {
+  Cinema,
+  CinemaWithScreens,
+  DataObject,
+  Screen,
+  Screening,
+} from '../models/cinema.model';
 import { GenericHttpService } from './generic-http.service';
 
 export interface ICinemaService {
   addCinema(cinema: Cinema): Observable<Cinema>;
+  addScreen(cinemaId: number, screen: Screen): Observable<Screen>;
   getCinemaUpdates(): Observable<CinemaWithScreens[]>;
-  getCinemasSnapshot(): CinemaWithScreens[];
+  getCinemaScreenings(cinemaId: number): Observable<DataObject<Screening>>;
 }
 
 @Injectable({
@@ -23,7 +29,7 @@ export class CinemaService implements ICinemaService {
 
   private loadCinemas() {
     this.httpService
-      .fetchData<DataObject<CinemaWithScreens>>(apiUrl + '/cinemas')
+      .fetchData<DataObject<CinemaWithScreens>>('/cinemas')
       .subscribe({
         next: (data: DataObject<CinemaWithScreens>) => {
           this.cinemas.next(data.content);
@@ -43,11 +49,22 @@ export class CinemaService implements ICinemaService {
     );
   }
 
+  addScreen(cinemaId: number, screen: Screen) {
+    return this.httpService
+      .createData('/cinemas/' + cinemaId + '/screens', screen)
+      .pipe(
+        map((data) => {
+          this.loadCinemas();
+          return data;
+        })
+      );
+  }
+
   getCinemaUpdates(): Observable<CinemaWithScreens[]> {
     return this.cinemas.asObservable();
   }
 
-  getCinemasSnapshot(): CinemaWithScreens[] {
-    return this.cinemas.getValue();
+  getCinemaScreenings(cinemaId: number): Observable<DataObject<Screening>> {
+    return this.httpService.fetchData('/cinemas/' + cinemaId + '/screenings');
   }
 }

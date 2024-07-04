@@ -1,0 +1,8 @@
+<div class="movies">
+  @for (movie of this.movies; track movie.id) {
+  <div class="movie">
+    <div class="title"><mat-icon>theaters</mat-icon>{{ movie.name }}</div>
+    <div class="duration"><mat-icon>timer</mat-icon>{{ movie.runtime }}</div>
+  </div>
+  }
+</div>

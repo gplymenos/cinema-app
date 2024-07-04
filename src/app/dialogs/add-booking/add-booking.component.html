@@ -1,15 +1,15 @@
 <app-add-dialog>
   <form>
     <mat-form-field>
-      <mat-label>Cinema Name</mat-label>
+      <mat-label>Seat Number</mat-label>
       <input
-        type="text"
+        type="number"
         matInput
-        [formControl]="nameControl"
+        [formControl]="seatControl"
         [errorStateMatcher]="matcher"
       />
-      @if (nameControl.hasError('required')) {
-      <mat-error>Cinema name is <strong>required</strong></mat-error>
+      @if (seatControl.hasError('required')) {
+      <mat-error>Seat number is <strong>required</strong></mat-error>
       }
     </mat-form-field>
   </form>
@@ -19,8 +19,8 @@
     <button
       mat-flat-button
       (click)="submit()"
-      [disabled]="!nameControl.valid"
       type="submit"
+      [disabled]="!seatControl.valid"
     >
       Submit
     </button>

@@ -1,0 +1,18 @@
+.movies {
+    box-sizing: border-box;
+    display:flex;
+    flex-wrap:wrap;
+    gap: 5px;
+}
+
+.movie {
+    box-sizing: border-box;
+    width: calc(20% - 5px);
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.title, .duration {
+    display: flex;
+}

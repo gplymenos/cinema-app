@@ -1,15 +1,21 @@
-.summary-wrapper {
+:host {
     display: flex;
+    gap: 16px;
+    height: 100%;
 }
 
 .section {
-
+    width: 175px;
+    background: var(--mdc-filled-button-container-color);
+    color: white;
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 .header {
-
-}
-
-.count {
-
+    display: flex;
+    gap: 5px;
 }

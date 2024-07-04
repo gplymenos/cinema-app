@@ -1,0 +1,71 @@
+.dashboard-wrapper {
+    box-sizing: border-box;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) 350px;
+    grid-template-rows: 140px repeat(4, 1fr);
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    max-height: 100vh;
+}
+    
+.summary { 
+    grid-area: 1 / 1 / 2 / 3; 
+    
+    mat-card-header {
+        margin-bottom: 16px;
+    }
+
+    mat-card-content {
+        height: 100%;
+    }
+}
+
+.cinema-list { 
+    grid-area: 1 / 3 / 6 / 5; 
+    max-height: 100vh;
+    
+    mat-card-header {
+        justify-content: space-between;
+        margin-bottom: 10px;
+        align-items: center;
+    }
+
+    mat-card-content {
+        overflow: auto;
+    }
+}
+
+.movies-section { 
+    grid-area: 2 / 1 / 4 / 3;
+
+    mat-card-header {
+        justify-content: space-between;
+        margin-bottom: 10px;
+        align-items: center;
+    }
+
+    mat-card-content {
+        overflow: auto;
+    }
+
+    .buttons { 
+        display: flex;
+        gap: 10px;
+    }
+}
+
+.cinema-section { 
+    grid-area: 6 / 1 / 4 / 3;
+
+    mat-card-header {
+        justify-content: space-between;
+        margin-bottom: 10px;
+        align-items: center;
+    }
+
+    .buttons { 
+        display: flex;
+        gap: 10px;
+    }
+}

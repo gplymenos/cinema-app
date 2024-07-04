@@ -1,0 +1,19 @@
+<mat-accordion>
+  @for (cinema of cinemas; track cinema.id) {
+  <mat-expansion-panel
+    (opened)="cinemaSelected(cinema)"
+    (closed)="cinemaDeselected()"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title
+        >{{ cinema.name }} ({{ cinema.screens.length }})</mat-panel-title
+      >
+    </mat-expansion-panel-header>
+    @for (screen of cinema.screens; track screen.id) {
+    <div class="screen">
+      {{ screen.name }}
+    </div>
+    }
+  </mat-expansion-panel>
+  }
+</mat-accordion>

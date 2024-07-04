@@ -1,2 +1,57 @@
-<app-dashboard-summary />
-<app-cinema-list />
+<div class="dashboard-wrapper">
+  <mat-card class="summary" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Cinemas Summary</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-dashboard-summary />
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="cinema-list" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>All Cinemas</mat-card-title>
+      <button mat-flat-button (click)="openAddCinema()">
+        <mat-icon>add</mat-icon> Cinema
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <app-cinema-list />
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="movies-section" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>All Movies</mat-card-title>
+      <div class="buttons">
+        <button mat-flat-button (click)="openAddMovie()">
+          <mat-icon>add</mat-icon>Movie
+        </button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <app-all-movies></app-all-movies>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="cinema-section" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>{{
+        selectedCinema?.name ?? "All Cinemas"
+      }}</mat-card-title>
+      @if (selectedCinema) {
+      <div class="buttons">
+        <button mat-flat-button (click)="openAddScreen()">
+          <mat-icon>add</mat-icon>Screen
+        </button>
+        <button mat-flat-button (click)="openAddBooking()">
+          <mat-icon>add</mat-icon>Booking
+        </button>
+      </div>
+      }
+    </mat-card-header>
+    <mat-card-content>
+      <app-cinema-screenings></app-cinema-screenings>
+    </mat-card-content>
+  </mat-card>
+</div>

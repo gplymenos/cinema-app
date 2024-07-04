@@ -28,11 +28,12 @@ export interface Screen {
 
 export interface Movie {
   id: number;
-  title: string;
+  name: string;
   runtime: number;
 }
 
 export interface Booking {
+  seat: number;
   id: string;
   // some fields here, API incomplete
 }

@@ -1,0 +1,13 @@
+@for (movie of groupedScreenings; track $index) {
+<div class="movie-wrapper">
+  <div class="header">
+    {{ movie[0] }} - {{ movie[1][0].movie.runtime }} mins
+  </div>
+
+  @for (screenings of movie[1]; track $index) {
+  <div class="screening-times">
+    {{ screenings.start | date }} <button mat-flat-button>Book Now</button>
+  </div>
+  }
+</div>
+}

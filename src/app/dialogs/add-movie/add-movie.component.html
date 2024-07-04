@@ -1,0 +1,40 @@
+<app-add-dialog>
+  <form>
+    <mat-form-field>
+      <mat-label>Movie Title</mat-label>
+      <input
+        type="text"
+        matInput
+        [formControl]="titleControl"
+        [errorStateMatcher]="matcher"
+      />
+      @if (titleControl.hasError('required')) {
+      <mat-error>Movie Title is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Movie Duration(minutes)</mat-label>
+      <input
+        type="number"
+        matInput
+        [formControl]="runtimeControl"
+        [errorStateMatcher]="matcher"
+      />
+      @if (titleControl.hasError('required')) {
+      <mat-error>Movie Title is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+  </form>
+
+  <div class="buttons">
+    <button mat-button (click)="closeModal()">Cancel</button>
+    <button
+      mat-flat-button
+      (click)="submit()"
+      [disabled]="!(titleControl.valid && runtimeControl.valid)"
+      type="submit"
+    >
+      Submit
+    </button>
+  </div>
+</app-add-dialog>

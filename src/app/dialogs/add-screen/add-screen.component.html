@@ -1,7 +1,7 @@
 <app-add-dialog>
   <form>
     <mat-form-field>
-      <mat-label>Cinema Name</mat-label>
+      <mat-label>Screen Name</mat-label>
       <input
         type="text"
         matInput
@@ -9,7 +9,7 @@
         [errorStateMatcher]="matcher"
       />
       @if (nameControl.hasError('required')) {
-      <mat-error>Cinema name is <strong>required</strong></mat-error>
+      <mat-error>Screen name is <strong>required</strong></mat-error>
       }
     </mat-form-field>
   </form>
@@ -18,8 +18,8 @@
     <button mat-button (click)="closeModal()">Cancel</button>
     <button
       mat-flat-button
-      (click)="submit()"
       [disabled]="!nameControl.valid"
+      (click)="submit()"
       type="submit"
     >
       Submit
