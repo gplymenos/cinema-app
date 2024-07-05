@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,6 +26,7 @@ export class CinemaListComponent {
   cinemaService = inject(CinemaService);
   dashboardService = inject(DashboardService);
   selectedCinema?: CinemaWithScreens;
+  @ViewChild('accordionEl') accordionEl!: ElementRef;
 
   ngOnInit(): void {
     this.cinemaService.getCinemaUpdates().subscribe({
@@ -36,12 +37,14 @@ export class CinemaListComponent {
   }
 
   cinemaSelected(cinema: CinemaWithScreens) {
-    this.dashboardService.setSelectedCinema(cinema);
-    this.selectedCinema = cinema;
-  }
+    setTimeout(() => {
+      const expandedAccordion = [
+        ...this.accordionEl.nativeElement.children,
+      ].some((child: HTMLElement) => child.classList.contains('mat-expanded'));
 
-  cinemaDeselected() {
-    this.dashboardService.setSelectedCinema(undefined);
-    this.selectedCinema = undefined;
+      this.dashboardService.setSelectedCinema(
+        expandedAccordion ? cinema : undefined
+      );
+    }, 100);
   }
 }

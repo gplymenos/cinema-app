@@ -1,0 +1,21 @@
+.header {
+    border-bottom: 1px solid;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.screening-times {
+    font-size: 14px;
+
+    span {
+        padding-bottom: 5px;
+        display: inline-block;
+        width: 150px;
+    }
+
+    button {
+        font-size: 13px;
+        padding: 14px;
+        height: 29px;
+    }
+}

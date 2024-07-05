@@ -23,7 +23,6 @@ export class BookingService implements IBookingService {
   private loadBookings() {
     this.httpService.fetchData<DataObject<Booking>>('/bookings').subscribe({
       next: (data: DataObject<Booking>) => {
-        console.log(data);
         this.bookings.next(data.content);
       },
       error: (error) => {

@@ -44,14 +44,18 @@
         <button mat-flat-button (click)="openAddScreen()">
           <mat-icon>add</mat-icon>Screen
         </button>
-        <button mat-flat-button (click)="openAddBooking()">
-          <mat-icon>add</mat-icon>Booking
+        <button mat-flat-button (click)="openAddScreening()">
+          <mat-icon>add</mat-icon>Screening
         </button>
       </div>
       }
     </mat-card-header>
     <mat-card-content>
+      @if (selectedCinema) {
       <app-cinema-screenings></app-cinema-screenings>
+      } @else {
+      <div class="message">Please select a Cinema!</div>
+      }
     </mat-card-content>
   </mat-card>
 </div>

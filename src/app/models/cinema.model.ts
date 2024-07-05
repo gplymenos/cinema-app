@@ -34,8 +34,7 @@ export interface Movie {
 
 export interface Booking {
   seat: number;
-  id: string;
-  // some fields here, API incomplete
+  screeningId: number;
 }
 
 export interface Screening {
@@ -45,10 +44,3 @@ export interface Screening {
   start: Date;
   movie: Movie;
 }
-
-// export interface User {
-//   id: string;
-//   firstName: string;
-//   lastName: string;
-//   bookings: Booking[];
-// }

@@ -1,0 +1,61 @@
+<app-add-dialog>
+  <form>
+    <mat-form-field>
+      <mat-label>Movie</mat-label>
+      <mat-select [formControl]="movieControl" [errorStateMatcher]="matcher">
+        @for (movie of allMovies; track movie.id) {
+        <mat-option [value]="movie.id">
+          {{ movie.name }}
+        </mat-option>
+        }
+      </mat-select>
+      @if (movieControl.hasError('required')) {
+      <mat-error>Movie is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Cinema Screen</mat-label>
+      <mat-select [formControl]="screenControl" [errorStateMatcher]="matcher">
+        @for (screen of selectedCinema?.screens; track screen.id) {
+        <mat-option [value]="screen.id">{{ screen.name }}</mat-option>
+        }
+      </mat-select>
+      @if (screenControl.hasError('required')) {
+      <mat-error>Cinema Screen is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Start date and time</mat-label>
+      <input
+        [formControl]="startTimeControl"
+        matInput
+        [matDatepicker]="picker"
+        [errorStateMatcher]="matcher"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      @if (startTimeControl.hasError('required')) {
+      <mat-error>Start date is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+  </form>
+
+  <div class="buttons">
+    <button mat-button (click)="closeModal()">Cancel</button>
+    <button
+      mat-flat-button
+      (click)="submit()"
+      [disabled]="
+        !(startTimeControl.valid && movieControl.valid && screenControl.valid)
+      "
+      type="submit"
+    >
+      Submit
+    </button>
+  </div>
+</app-add-dialog>

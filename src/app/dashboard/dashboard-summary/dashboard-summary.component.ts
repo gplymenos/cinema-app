@@ -41,8 +41,6 @@ export class DashboardSummaryComponent implements OnInit {
     });
 
     this.bookingService.getBookingUpdates().subscribe((data) => {
-      console.log('bookings');
-      console.log(data);
       this.summaryData()[3].count = data.length;
     });
 

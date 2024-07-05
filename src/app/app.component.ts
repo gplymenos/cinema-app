@@ -9,10 +9,10 @@ import { AllMoviesComponent } from './dashboard/all-movies/all-movies.component'
 import { CinemaListComponent } from './dashboard/cinema-list/cinema-list.component';
 import { CinemaScreeningsComponent } from './dashboard/cinema-screenings/cinema-screenings.component';
 import { DashboardSummaryComponent } from './dashboard/dashboard-summary/dashboard-summary.component';
-import { AddBookingComponent } from './dialogs/add-booking/add-booking.component';
 import { AddCinemaComponent } from './dialogs/add-cinema/add-cinema.component';
 import { AddMovieComponent } from './dialogs/add-movie/add-movie.component';
 import { AddScreenComponent } from './dialogs/add-screen/add-screen.component';
+import { AddScreeningComponent } from './dialogs/add-screening/add-screening.component';
 import { CinemaWithScreens } from './models/cinema.model';
 import { DashboardService } from './services/dashboard.service';
 
@@ -38,9 +38,11 @@ export class AppComponent implements OnInit {
   dashboardService = inject(DashboardService);
 
   ngOnInit(): void {
-    this.dashboardService.getSelectedCinema().subscribe((selectedCinema) => {
-      this.selectedCinema = selectedCinema;
-    });
+    this.dashboardService
+      .getSelectedCinema()
+      .subscribe((selectedCinema: CinemaWithScreens | undefined) => {
+        this.selectedCinema = selectedCinema;
+      });
   }
 
   openAddCinema() {
@@ -51,8 +53,8 @@ export class AppComponent implements OnInit {
     this.openModal(AddScreenComponent, 'Add Screen');
   }
 
-  openAddBooking() {
-    this.openModal(AddBookingComponent, 'Add Booking');
+  openAddScreening() {
+    this.openModal(AddScreeningComponent, 'Add Screening');
   }
 
   openAddMovie() {
@@ -60,7 +62,7 @@ export class AppComponent implements OnInit {
   }
 
   openModal(componentType: ComponentType<unknown>, title: string) {
-    const dialogRef = this.dialog.open(componentType, {
+    this.dialog.open(componentType, {
       data: {
         title: title,
         selectedCinema: this.selectedCinema,

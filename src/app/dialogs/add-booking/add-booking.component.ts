@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import {
   FormControl,
   FormsModule,
@@ -6,10 +6,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Booking } from '../../models/cinema.model';
+import { DialogData } from '../../models/dialog-data.model';
 import { BookingService } from '../../services/booking.service';
 import { AddDialogComponent } from '../../shared/add-dialog/add-dialog.component';
 import { MyErrorStateMatcher } from '../../validation-helper';
@@ -37,6 +37,8 @@ export class AddBookingComponent {
   seatControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
   closeModal() {
     this.dialogRef.close();
   }
@@ -46,7 +48,8 @@ export class AddBookingComponent {
     if (seatNumber) {
       const booking = {
         seat: +seatNumber,
-      } as Booking;
+        screeningId: +this.data.selectedScreening,
+      };
 
       this.bookingService.addBooking(booking).subscribe(() => {
         this.closeModal();

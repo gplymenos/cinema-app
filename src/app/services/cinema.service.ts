@@ -22,6 +22,7 @@ export interface ICinemaService {
 export class CinemaService implements ICinemaService {
   private httpService = inject(GenericHttpService);
   private cinemas = new BehaviorSubject<CinemaWithScreens[]>([]);
+  screeningAdded = new BehaviorSubject<null>(null);
 
   constructor() {
     this.loadCinemas();
@@ -55,6 +56,25 @@ export class CinemaService implements ICinemaService {
       .pipe(
         map((data) => {
           this.loadCinemas();
+          return data;
+        })
+      );
+  }
+
+  addScreening(
+    cinemaId: number,
+    screenId: string,
+    movieId: string,
+    startTime: Date
+  ) {
+    return this.httpService
+      .createData(
+        '/cinemas/' + cinemaId + '/screens/' + screenId + '/screenings',
+        { movieId: movieId, startTime: startTime }
+      )
+      .pipe(
+        map((data) => {
+          this.screeningAdded.next(null);
           return data;
         })
       );
